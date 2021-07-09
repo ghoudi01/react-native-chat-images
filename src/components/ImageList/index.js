@@ -8,10 +8,25 @@ import {
   Modal,
   ActivityIndicator,
   Text,
+  StatusBar
 } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import PropTypes from 'prop-types';
-
+import {
+  Body,
+  Header,
+  List,
+  ListItem as Item,
+  ScrollableTab,
+  Tab,
+  Tabs,
+  Title,
+  Left,
+  Right,
+  Button,
+  Fab,
+  Icon,
+} from "native-base";
 import Img from '../Img';
 import { BackIcon } from '../Icons';
 import { trueTypeOf } from '../../utils';
@@ -43,11 +58,8 @@ class ImageList extends Component {
 
   renderBackBtn = () => {
     const { setModalVisible, title } = this.props;
-
-    return (
-      <View style={styles.backBtnView}>
-        <TouchableOpacity
-          onPress={() => setModalVisible(false)}
+ {/* <TouchableOpacity
+        
           style={styles.backBtnTouchableOpacity}
         >
           <Image
@@ -55,15 +67,56 @@ class ImageList extends Component {
             resizeMode="contain"
             style={{ height: 30, marginLeft: -10 }}
           />
-        </TouchableOpacity>
-        {title && <Text style={styles.title}>{title}</Text>}
-      </View>
+        </TouchableOpacity> */}
+    return (
+     
+       
+      
+
+
+        <Header style={{ backgroundColor: "#fff" }}>
+            <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
+            <Left
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                flex: 1,
+              }}
+            >
+               
+                <Button
+                  transparent
+                  onPress={() => setModalVisible(false)}
+                >
+                  <Icon type="AntDesign" name="right" style={{color: "#0E3C61",}} />
+                </Button>
+             
+              <Title
+                style={{
+                  textAlign: "left",
+
+                  /*fontFamily: "Cario-Bold",*/ 
+                  flex: 1,
+                }}
+              >
+                {"الصور"}
+              </Title>
+            </Left>
+
+            <Right>
+               
+            </Right>
+          </Header>
+
+      
     );
   };
 
   renderImages = () => {
     const { images, backgroundColor } = this.props;
-    const imagesToRender = images.map((img, i) => (
+    const imagesToRender = images.map((img, i) => {
+        
+      return (
       <TouchableOpacity
         key={`List-Image-${i + 1}`}
         style={[styles.clickableImg, { backgroundColor }]}
@@ -72,7 +125,7 @@ class ImageList extends Component {
       >
         <Img image={img} />
       </TouchableOpacity>
-    ));
+    )});
     return imagesToRender;
   };
 
@@ -103,6 +156,8 @@ class ImageList extends Component {
               loadingRender={() => (
                 <ActivityIndicator size="small" color="#eee" />
               )}
+              onSwipeDown={()=>this.setState({ showImg: false })}
+              enableSwipeDown={true}
               imageUrls={imageUrls}
               saveToLocalByLongPress={saveOnLongPress}
               pageAnimateTime={0}

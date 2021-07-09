@@ -6,12 +6,16 @@ import { DefaultImage } from '../Icons';
 import styles from './styles';
 
 class AsyncImage extends Component {
-  state = { error: false, loaded: false };
+  constructor(props){
+    super(props);
+    this.state = { error: false, loaded: false };
+  }
+  
 
   render() {
     const { source } = this.props;
     const { loaded, error } = this.state;
-
+     
     return (
       <View style={styles.container}>
         <View style={styles.innerView}>
@@ -22,12 +26,7 @@ class AsyncImage extends Component {
             style={styles.img}
           />
 
-          {!loaded && (
-            <Image
-              source={{ uri: DefaultImage }}
-              style={[styles.placeHolderImg, { opacity: error ? 0.7 : 0.2 }]}
-            />
-          )}
+         
         </View>
       </View>
     );

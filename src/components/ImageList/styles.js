@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   },
   backBtnView: {
     flexDirection: 'row',
-    height: 'auto',
+    height: 50,
     width: '100%',
   },
   caption: {
